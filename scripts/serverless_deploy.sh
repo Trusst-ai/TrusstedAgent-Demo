@@ -6,7 +6,7 @@ date
 
 source ./env/$1.sh
 
-echo "Deploying ConnectVoice to $stage"
+echo "Deploying TrusstedAgent to $stage"
 
 ./scripts/check_aws_account.sh
 

@@ -1,5 +1,5 @@
 {
-  "name": "connectvoice",
+  "name": "trussted-agent-demo",
   "version": "1.0.0",
   "description": "Provides infrastructure for processing streaming voice data",
   "main": "index.js",

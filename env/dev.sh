@@ -4,25 +4,20 @@
 export stage=dev
 
 # Should not need to change
-export service=connectvoice
+export service=trusstedagent
 
 # Target AWS deployment region
-export region=us-west-2
+export region=ap-southeast-2
 
 # Bedrock region
-export bedrockRegion=us-west-2
+export bedrockRegion=ap-southeast-2
 
 export AWS_REGION=$region
 
-export DISABLE_AWS_PROFILE=true
+export profile=camilo-sandbox
+export AWS_PROFILE=$profile
 
-# Use named AWS profile unless it is specifically disabled
-if [ -z "$DISABLE_AWS_PROFILE" ]; then
-  export profile=duthiee1
-  export AWS_PROFILE=$profile
-
-  echo "Enabled AWS_PROFILE = $AWS_PROFILE"
-fi
+echo "Enabled AWS_PROFILE = $AWS_PROFILE"
 
 # AWS account number
 export accountNumber=$(aws sts get-caller-identity --query Account --output text)
