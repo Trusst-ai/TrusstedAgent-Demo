@@ -14,10 +14,10 @@ export bedrockRegion=ap-southeast-2
 
 export AWS_REGION=$region
 
-export profile=camilo-sandbox
-export AWS_PROFILE=$profile
-
-echo "Enabled AWS_PROFILE = $AWS_PROFILE"
+if [ -z "$AWS_PROFILE" ]; then
+  echo "Please set AWS_PROFILE=<<your-aws-profile>> before continuing..."
+  exit 1
+fi
 
 # AWS account number
 export accountNumber=$(aws sts get-caller-identity --query Account --output text)

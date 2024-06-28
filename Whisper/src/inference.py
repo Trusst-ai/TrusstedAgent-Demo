@@ -24,7 +24,8 @@ def model_fn(model_dir):
     """
     Deserialize and return fitted model.
     """
-    model = whisper.load_model(os.path.join(model_dir, 'whisper-large-v3.pt'))
+    #model = whisper.load_model(os.path.join(model_dir, 'whisper-large-v3.pt'))
+    model = whisper.load_model("large-v3")
     model = model.to(DEVICE)
     print(f'whisper model has been loaded to this device: {model.device.type}')
     options = whisper.DecodingOptions(language="en", without_timestamps=True, fp16 = False)

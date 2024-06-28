@@ -1,5 +1,7 @@
 # Amazon Connect Real Time Transcription using Whisper in the IVR
 
+[trussted-agent-architecture](./architecture/AgentArchitecture.png)
+
 ## Installation
 
 Customise env/dev.sh with your target region, account number and whisper end point. Pay attention to the AWS Profile name, if deploying and testing from the command line.
@@ -9,6 +11,12 @@ Change the stage and rename to env/<stage>.sh to deploy to a new stage environme
 Execute this script once:
 
     ./scripts/create_deployment_bucket.sh <stage>
+
+Create key pair with the following name:
+
+```
+TextToSpeechInstanceKeyPair
+```
 
 To deploy execute this script as often as required:
 
