@@ -11,7 +11,7 @@ provider:
   deploymentBucket:
     name: ${env:deploymentBucket}
   deploymentPrefix: applications/${self:service}
-  stackName: ${env:stage}-${self:service}-2
+  stackName: ${env:stage}-${self:service}-demo
   apiGateway:
     shouldStartNameWithService: true
 
@@ -225,13 +225,18 @@ resources:
         KeyName: TextToSpeechInstanceKeyPair 
         # Matches TrusstGPT's instance type
         InstanceType: g5.2xlarge 
-        # UserData: 
-          # Fn::Base64: "${file(./scripts/setup_text_to_speech.sh)}"
+        UserData: 
+          Fn::Base64: "${file(./scripts/setup_text_to_speech.sh)}"
         # Allow SSH into instance
         SecurityGroupIds:
-          - !GetAtt "InstanceSecurityGroup.GroupId"
+          - !GetAtt "TextToSpeechGroup.GroupId"
+        BlockDeviceMappings:
+          - DeviceName: "/dev/sda1"
+            Ebs:
+                VolumeType: gp3
+                VolumeSize: 80
 
-    InstanceSecurityGroup:
+    TextToSpeechGroup:
       Type: AWS::EC2::SecurityGroup
       Properties:
         GroupDescription: "Allow SSH Access"
