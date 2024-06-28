@@ -14,14 +14,9 @@ export bedrockRegion=us-west-2
 
 export AWS_REGION=$region
 
-export DISABLE_AWS_PROFILE=true
-
-# Use named AWS profile unless it is specifically disabled
-if [ -z "$DISABLE_AWS_PROFILE" ]; then
-  export profile=duthiee1
-  export AWS_PROFILE=$profile
-
-  echo "Enabled AWS_PROFILE = $AWS_PROFILE"
+if [ -z "$AWS_PROFILE" ]; then
+  echo "Please set AWS_PROFILE=<<your-aws-profile>> before continuing..."
+  exit 1
 fi
 
 # AWS account number
