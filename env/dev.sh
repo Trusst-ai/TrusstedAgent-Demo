@@ -14,8 +14,6 @@ export bedrockRegion=ap-southeast-2
 
 export AWS_REGION=$region
 
-export AWS_PROFILE=alliance
-
 if [ -z "$AWS_PROFILE" ]; then
   echo "Please set AWS_PROFILE=<<your-aws-profile>> before continuing..."
   exit 1
