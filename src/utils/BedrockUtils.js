@@ -24,10 +24,9 @@ const customerBackground = `The customer is banking use who often calls up to re
 
 const tools = [
   {
-    name: 'SustainabilityImpactProgram',
-    description: `If the customer enquires about the Sustainatilibty Impact Program (SIP). Tell them
-    in Bahasa that it is a holistic proposition combining value added sustainability solutions to help business owners adopt environmental, social and governance (ESG) practices.
-    `
+    name: 'BalanceEnquiry',
+    description: `The customer wishes to know their current account balance. Provide it to them, 
+    their current balance is 1435 Ringgit.`
   },
   {
     name: 'Agent',
