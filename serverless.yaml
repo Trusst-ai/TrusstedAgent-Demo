@@ -16,7 +16,6 @@ provider:
     shouldStartNameWithService: true
 
 custom:
-
   deployVersion: ${env:deployVersion, '1.0.0 initial release'}
 
 package:
@@ -248,3 +247,43 @@ resources:
             # https://github.com/Trusst-ai/TrusstGPT/blob/aa7656b721a9433b0bf023d330c7573704c6c66e/packages/infra/src/app/ingest/transcribe/ec2-transcribe-server.ts#L174
             # but we may want to narrow it in the future
             CidrIp: 0.0.0.0/0 # As defined for EC2
+
+    TextToSpeechBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: 'trussted-agent-text-to-speech-bucket'
+      DependsOn:
+        - TextToSpeechInstance
+    
+    RootInstanceProfile:
+        Type: AWS::IAM::InstanceProfile
+        Properties:
+          Path: /
+          Roles:
+            - !Ref TextToSpeechS3WritableRole
+
+    TextToSpeechS3WritableRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: ec2.amazonaws.com
+              Action: sts:AssumeRole
+        Path: /
+
+    TextToSpeechS3RolePolicy:
+      Type: AWS::IAM::Policy
+      DependsOn:
+        - TextToSpeechInstance
+      Properties:
+        PolicyName: !Sub '${self:provider.stage}-${self:service}-text-to-speech-instance-policy'
+        PolicyDocument:
+          Statement:
+            - Effect: Allow
+              Action:
+                - 's3:*'
+              Resource: '*'
+        Roles:
+          - !Ref TextToSpeechS3WritableRole

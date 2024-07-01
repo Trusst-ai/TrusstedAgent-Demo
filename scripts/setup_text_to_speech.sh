@@ -43,10 +43,6 @@ pip install matplotlib
 pip install ipython
 pip install BeautifulSoup4
 
-# export AWS_DEFAULT_REGION=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/\(.*\)[a-z]/\1/')
-# mkdir -p ~/.aws
-# echo -e "[default]\nregion=${AWS_DEFAULT_REGION}" > ~/.aws/config
-
 # python <<HEREDOC
 # from trusstpy.server import server
 # server()

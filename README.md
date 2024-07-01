@@ -1,6 +1,6 @@
 # Amazon Connect Real Time Transcription using Whisper in the IVR
 
-[trussted-agent-architecture](./architecture/AgentArchitecture.png)
+![trussted-agent-architecture](./architecture/AgentArchitecture.png "Trussted Agent Architecture)
 
 ## Installation
 
