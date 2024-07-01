@@ -74,6 +74,17 @@ functions:
       STAGE: '${self:provider.stage}'
       NEXT_MESSAGE_TABLE: !Ref NextMessageTable
 
+  texttospeech:
+    handler: src/lambda/TextToSpeech.handler
+    name: '${self:provider.stage}-${self:service}-text-to-speech'
+    description: 'Text to Speech turns text to .WAV sound'
+    role: LambdaRole
+    timeout: 7
+    environment:
+      REGION: '${self:provider.region}'
+      STAGE: '${self:provider.stage}'
+      EC2_INSTANCE_IP: !GetAtt TextToSpeechInstance.PublicIp
+
 resources:
   Description: 'TrusstedAgent-Demo - ${self:provider.stage}'
   Resources:
