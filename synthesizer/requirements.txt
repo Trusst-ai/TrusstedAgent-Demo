@@ -1,5 +1,0 @@
-flask
-torch
-torchaudio
-tortoise-tts
-deepspeed
