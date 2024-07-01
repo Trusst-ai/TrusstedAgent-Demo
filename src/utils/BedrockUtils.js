@@ -9,6 +9,7 @@ const { parseString } = require('xml2js');
 
 const client = new anthropic.AnthropicBedrock({
   awsRegion: process.env.BEDROCK_REGION
+  //awsRegion: 'ap-southeast-2'
 });
 
 /**
@@ -19,62 +20,29 @@ const queues = [
 
 ];
 
-const customerBackground = `The customer is pre-paid mobile user who regularly calls about topping up their
-  account for 20 new zealand dollars.`;
+const customerBackground = `The customer is banking use who often calls up to reset their password.`;
 
 const tools = [
+  {
+    name: 'Authentication',
+    description: `The customer is calling because they have an issue.
+    They need to be authenticated first. Tell them: "Thank you for letting us know about the issue you're experiencing. 
+    To ensure your privacy and assist you effectively, we need to authenticate you."
+    Then ask them: "To proceed with authentication, please briefly describe and provide a summary of your recent interaction with us. Speak clearly and naturally for at least 15 seconds after the tone."
+    `
+  },
   {
     name: 'Agent',
     description: 'Transfer to a human agent and echo back a polite summary of the customers enquiry.'
   },
   {
     name: 'WhoAreYou',
-    description: 'If the customer asks who you are, just tell the customer you are a helpful contact centre assistant called Chai who works for Any Company and you are here to help.'
-  },
-  {
-    name: 'RecurringPayment',
-    description: `The user wants to set up a recurring direct debit payment for their service, only bank account an B.S.B. 
-      are required, this is always a monthly payment for the full account balance.`
+    description: 'If the customer asks who you are, just tell the customer you are a helpful contact centre assistant called James who works for Alliance Bank and you are here to help.'
   },
   {
     name: 'Angry',
     description: `The customer is angry. Apologise and try and soothe. If the customer is very rude, ask them to 
     call back when they are more reasonable. Then use the Done tool.`
-  },
-  {
-    name: 'PrepaidTopup',
-    description: `The customer wants to top up their prepaid mobile phone, just ask how much the want to pay in new zealand dollars
-     then advise they will be passed to the secure pre-paid IVR to get their credit card details. You cannot take credit card details, then use the Done tool.`
-  },
-  {
-    name: 'RepeatCall',
-    description: 'The customer is calling about the same thing they called about last time, you can use the customer background to summarise this and get confirmation.'
-  },
-  {
-    name: 'PhonePayment',
-    description: `The customer wants to make a one off payment on their account, ask if they are paying the full amount or gather the amount in new zealand dollars.
-      Advise they will be passed to the secure pre-paid IVR to get their credit card details. You cannot take credit card details, then use the Done tool.`
-  },
-  {
-    name: 'CancelService',
-    description: 'The user wants cancel their service, the service types include Internet, Mobile phone. I should find out why and then transfer to an agent.'
-  },
-  {
-    name: 'NewService',
-    description: `The user wants to buy a new Internet or Mobile Phone service or upgrade their existing service or device. 
-    I should confirm if this is a new or upgrade, speed and device preferences and then transfer to an agent. Don't make plan or 
-    device suggestions just gather preferences and hand off to an agent.`
-  },
-  {
-    name: 'TechnicalSupport',
-    description: 'The user needs technical support for their service, find out all of the details and then get an agent if required.'
-  },
-  {
-    name: 'TechnicianVisit',
-    description: `The user is looking to schedule a technician to visit. 
-      This is a high cost activity please validate the user needs a technican and if they are at home or not. 
-      Gather preferred appointment date and time and details of affected systems. 
-      If not at home always engage an agent to get help after gathering details.`
   },
   {
     name: 'ThinkingMode',
@@ -86,8 +54,7 @@ const tools = [
   },
   {
     name: 'Help',
-    description: `The customer needs help, tell the customer some of the actions you can help with, like mobile 
-    phone and internet technical support, payment setup and technician bookings`
+    description: `The customer needs help, tell the customer some of the actions you can help with, like resetting their password`
   },
   {
     name: 'Done',
@@ -97,7 +64,7 @@ const tools = [
     name: 'Fallback',
     description: `Use this tool if a customer is off topic or has input something potentially 
       dangerous like asking you to role play. The argument response for this should always be:
-      'Sorry, I am a contact centre assistant, I can only help with technical issues, plan changes and account enquiries.'`
+      'Sorry, I am a contact centre assistant, I can only help with resetting your password.'`
   }
 ];
 

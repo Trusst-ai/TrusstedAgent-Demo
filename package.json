@@ -18,7 +18,7 @@
     "serverless": "^3.38.0"
   },
   "dependencies": {
-    "@anthropic-ai/bedrock-sdk": "^0.9.1",
+    "@anthropic-ai/bedrock-sdk": "^0.9.8",
     "dayjs": "^1.11.10",
     "ebml-stream": "^1.0.3",
     "uuid": "^9.0.1",
