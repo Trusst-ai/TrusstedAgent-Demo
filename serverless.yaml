@@ -223,7 +223,8 @@ resources:
         # Created manually inside EC2 Console
         KeyName: TextToSpeechInstanceKeyPair 
         # Matches TrusstGPT's instance type
-        InstanceType: g5.2xlarge 
+        InstanceType: g5.2xlarge
+        IamInstanceProfile: !Ref RootInstanceProfile
         UserData: 
           Fn::Base64: "${file(./scripts/setup_text_to_speech.sh)}"
         # Allow SSH into instance
@@ -234,6 +235,7 @@ resources:
             Ebs:
                 VolumeType: gp3
                 VolumeSize: 80
+      
 
     TextToSpeechGroup:
       Type: AWS::EC2::SecurityGroup

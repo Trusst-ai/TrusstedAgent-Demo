@@ -41,7 +41,12 @@ def write_to_local_fs(data):
 
 def write_to_s3(data):
     s3 = boto3.client("s3")
-    s3.Object(bucketName, audioFileName).put(Body=open(audioFileName, 'rb'))
+    s3.put_object(
+        Bucket=bucketName,
+        Key=audioFileName,
+        Body=open(audioFileName, 'rb')
+    )
+    # s3.Object(bucketName, audioFileName).put(Body=open(audioFileName, 'rb'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
