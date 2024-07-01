@@ -219,7 +219,7 @@ resources:
       Properties: 
         # As defined in TrusstGPT at 
         # https://github.com/Trusst-ai/TrusstGPT/blob/aa7656b721a9433b0bf023d330c7573704c6c66e/packages/infra/src/app/ingest/transcribe/ec2-transcribe-server.ts#L184
-        ImageId: ami-03491b5978930f6f6
+        ImageId: ami-002a43a711f3295b3
         # Created manually inside EC2 Console
         KeyName: TextToSpeechInstanceKeyPair 
         # Matches TrusstGPT's instance type

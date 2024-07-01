@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Change to test, uat, prod etc
-export stage=dev
+export stage=demo
 
 # Should not need to change
 export service=trusstedagent
@@ -27,7 +27,7 @@ echo "Using AWS_PROFILE=${AWS_PROFILE}"
 export accountNumber=$(aws sts get-caller-identity --query Account --output text)
 
 # Whisper V3
-export whisperEndPoint=whisper-endpoint
+export whisperEndPoint=lissten-endpoint
 
 # S3 bucket to upload deployment assets to
 export deploymentBucket="${stage}-${service}-deployment-${accountNumber}"

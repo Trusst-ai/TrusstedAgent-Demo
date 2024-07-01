@@ -24,11 +24,9 @@ const customerBackground = `The customer is banking use who often calls up to re
 
 const tools = [
   {
-    name: 'Authentication',
-    description: `The customer is calling because they have an issue.
-    They need to be authenticated first. Tell them: "Thank you for letting us know about the issue you're experiencing. 
-    To ensure your privacy and assist you effectively, we need to authenticate you."
-    Then ask them: "To proceed with authentication, please briefly describe and provide a summary of your recent interaction with us. Speak clearly and naturally for at least 15 seconds after the tone."
+    name: 'SustainabilityImpactProgram',
+    description: `If the customer enquires about the Sustainatilibty Impact Program (SIP). Tell them
+    in Bahasa that it is a holistic proposition combining value added sustainability solutions to help business owners adopt environmental, social and governance (ESG) practices.
     `
   },
   {
@@ -54,7 +52,7 @@ const tools = [
   },
   {
     name: 'Help',
-    description: `The customer needs help, tell the customer some of the actions you can help with, like resetting their password`
+    description: `The customer needs help, tell the customer some of the actions you can help with, like providing a balance enquiry`
   },
   {
     name: 'Done',
