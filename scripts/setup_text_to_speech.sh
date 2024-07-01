@@ -35,9 +35,9 @@ pip install malaya-speech
 
 # tensorflow and tensorflow-estimator must have a matching version
 # https://stackoverflow.com/questions/66022256/modulenotfounderror-no-module-named-tensorflow-core-estimator-for-tensorflow
-pip install tensorflow -v "2.15.0"
+pip install "tensorflow==2.15.0"
 pip install tensorrt
-pip install tensorflow-estimator -v "2.15.0"
+pip install "tensorflow-estimator==2.15.0"
 pip install malaya
 pip install matplotlib
 pip install ipython
