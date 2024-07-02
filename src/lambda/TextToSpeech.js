@@ -1,6 +1,7 @@
 module.exports.handler = async (event) => {
-  const url = event.URL;
-  const text = event.Text;
+  console.log('Received event:', JSON.stringify(event, null, 2));
+  const url = event.Details.Parameters.input.URL;
+  const text = event.Details.Parameters.input.Text;
 
   await callEc2TextToSpeech(url, text);
 }

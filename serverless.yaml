@@ -83,7 +83,6 @@ functions:
     environment:
       REGION: '${self:provider.region}'
       STAGE: '${self:provider.stage}'
-      EC2_INSTANCE_IP: !GetAtt TextToSpeechInstance.PublicIp
 
 resources:
   Description: 'TrusstedAgent-Demo - ${self:provider.stage}'
