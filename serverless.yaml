@@ -76,9 +76,10 @@ functions:
 
   texttospeech:
     handler: src/lambda/TextToSpeech.handler
-    name: '${self:provider.stage}-${self:service}-text-to-speech'
-    description: 'Text to Speech turns text to .WAV sound'
+    name: 'text-to-speech-initiator'
+    description: 'Sends a text message to a queue to be converted into an audio file'
     role: LambdaRole
+    memorySize: 256
     timeout: 7
     environment:
       REGION: '${self:provider.region}'
@@ -151,6 +152,9 @@ resources:
                 - 'sts:AssumeRole'
         ManagedPolicyArns:
           - !Ref LambdaPolicy
+          # Grant all lambdas permissions to execute while accessing a resource within a VPC
+          # https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSLambdaVPCAccessExecutionRole.html
+          - 'arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole'
 
     LambdaPolicy:
       Type: 'AWS::IAM::ManagedPolicy'
@@ -224,78 +228,91 @@ resources:
         QueueName: !Sub '${self:provider.stage}-${self:service}-process-redrive'
         VisibilityTimeout: 120
     
-    # TextToSpeechInstance:
-    #   Type: AWS::EC2::Instance
-    #   Properties: 
-    #     # As defined in TrusstGPT at 
-    #     # https://github.com/Trusst-ai/TrusstGPT/blob/aa7656b721a9433b0bf023d330c7573704c6c66e/packages/infra/src/app/ingest/transcribe/ec2-transcribe-server.ts#L184
-    #     ImageId: ami-002a43a711f3295b3
-    #     # Created manually inside EC2 Console
-    #     KeyName: TextToSpeechInstanceKeyPair 
-    #     # Matches TrusstGPT's instance type
-    #     InstanceType: g5.2xlarge
-    #     IamInstanceProfile: !Ref RootInstanceProfile
-    #     UserData: 
-    #       Fn::Base64: "${file(./scripts/setup_text_to_speech.sh)}"
-    #     # Allow SSH into instance
-    #     SecurityGroupIds:
-    #       - !GetAtt "TextToSpeechGroup.GroupId"
-    #     BlockDeviceMappings:
-    #       - DeviceName: "/dev/sda1"
-    #         Ebs:
-    #             VolumeType: gp3
-    #             VolumeSize: 80
-      
+    TextToSpeechInstance:
+      Type: AWS::EC2::Instance
+      Properties: 
+        # As defined in TrusstGPT at 
+        # https://github.com/Trusst-ai/TrusstGPT/blob/aa7656b721a9433b0bf023d330c7573704c6c66e/packages/infra/src/app/ingest/transcribe/ec2-transcribe-server.ts#L184
+        ImageId: ami-03491b5978930f6f6
+        # Created manually inside EC2 Console
+        KeyName: TextToSpeechInstanceKeyPair 
+        # Matches TrusstGPT's instance type
+        InstanceType: g5.2xlarge
+        IamInstanceProfile: !Ref RootInstanceProfile
+        UserData: 
+          Fn::Base64: "${file(./scripts/setup_text_to_speech.sh)}"
+        # Allow SSH into instance
+        SecurityGroupIds:
+          - !GetAtt "SshSecurityGroup.GroupId"
+          - !GetAtt "HttpSecurityGroup.GroupId"
+        BlockDeviceMappings:
+          - DeviceName: "/dev/sda1"
+            Ebs:
+                VolumeType: gp3
+                VolumeSize: 80
 
-    # TextToSpeechGroup:
-    #   Type: AWS::EC2::SecurityGroup
-    #   Properties:
-    #     GroupDescription: "Allow SSH Access"
-    #     SecurityGroupIngress:
-    #       - IpProtocol: tcp
-    #         FromPort: 22
-    #         ToPort: 22
-    #         # A CIDR to represent any IPv4 address. It has been defined in TrusstGPT like this at 
-    #         # https://github.com/Trusst-ai/TrusstGPT/blob/aa7656b721a9433b0bf023d330c7573704c6c66e/packages/infra/src/app/ingest/transcribe/ec2-transcribe-server.ts#L174
-    #         # but we may want to narrow it in the future
-    #         CidrIp: 0.0.0.0/0 # As defined for EC2
+    HttpSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: "Allow SSH Access"
+        SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: 80
+            ToPort: 80
+            # A CIDR to represent any IPv4 address. It has been defined in TrusstGPT like this at 
+            # https://github.com/Trusst-ai/TrusstGPT/blob/aa7656b721a9433b0bf023d330c7573704c6c66e/packages/infra/src/app/ingest/transcribe/ec2-transcribe-server.ts#L174
+            # but we may want to narrow it in the future
+            CidrIp: 0.0.0.0/0 # As defined for EC2
+        # No VPC specified so it should choose the default VPC
 
-    # TextToSpeechBucket:
-    #   Type: AWS::S3::Bucket
-    #   Properties:
-    #     BucketName: 'trussted-agent-text-to-speech-bucket'
-    #   DependsOn:
-    #     - TextToSpeechInstance
+    SshSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: "Allow SSH Access"
+        SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: 22
+            ToPort: 22
+            # A CIDR to represent any IPv4 address
+            CidrIp: 0.0.0.0/0 # As defined for EC2
+        # No VPC specified so it should choose the default VPC
+
+    TextToSpeechBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: 'trussted-agent-text-to-speech-bucket'
+      DependsOn:
+        - TextToSpeechInstance
     
-    # RootInstanceProfile:
-    #     Type: AWS::IAM::InstanceProfile
-    #     Properties:
-    #       Path: /
-    #       Roles:
-    #         - !Ref TextToSpeechS3WritableRole
+    RootInstanceProfile:
+        Type: AWS::IAM::InstanceProfile
+        Properties:
+          Path: /
+          Roles:
+            - !Ref TextToSpeechS3WritableRole
 
-    # TextToSpeechS3WritableRole:
-    #   Type: AWS::IAM::Role
-    #   Properties:
-    #     AssumeRolePolicyDocument:
-    #       Statement:
-    #         - Effect: Allow
-    #           Principal:
-    #             Service: ec2.amazonaws.com
-    #           Action: sts:AssumeRole
-    #     Path: /
+    TextToSpeechS3WritableRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: ec2.amazonaws.com
+              Action: sts:AssumeRole
+        Path: /
 
-    # TextToSpeechS3RolePolicy:
-    #   Type: AWS::IAM::Policy
-    #   DependsOn:
-    #     - TextToSpeechInstance
-    #   Properties:
-    #     PolicyName: !Sub '${self:provider.stage}-${self:service}-text-to-speech-instance-policy'
-    #     PolicyDocument:
-    #       Statement:
-    #         - Effect: Allow
-    #           Action:
-    #             - 's3:*'
-    #           Resource: '*'
-    #     Roles:
-    #       - !Ref TextToSpeechS3WritableRole
+    TextToSpeechS3RolePolicy:
+      Type: AWS::IAM::Policy
+      DependsOn:
+        - TextToSpeechInstance
+      Properties:
+        PolicyName: !Sub '${self:provider.stage}-${self:service}-text-to-speech-instance-policy'
+        PolicyDocument:
+          Statement:
+            - Effect: Allow
+              Action:
+                - 's3:*'
+              Resource: '*'
+        Roles:
+          - !Ref TextToSpeechS3WritableRole
