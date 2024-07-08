@@ -1,0 +1,33 @@
+<html>
+  <script>
+    function convert() {
+      const input = document.getElementById("textToConvert");
+      const inputValue = input.value;
+      alert(inputValue);
+      fetch('http://ec2-13-212-61-177.ap-southeast-1.compute.amazonaws.com:80/synthesize', {
+        method: 'POST', // Specify the HTTP method
+        body: JSON.stringify({ "text": inputValue }),
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain' // Specify the content type
+        },
+      })
+        .then(response => response.text()) // Read response as text
+        .then(data => alert(data)); // Alert the response
+    }
+    
+  </script>
+  <body>
+  <h1>Test the TTS client</h1>
+  <form>
+    <input type="text" size="100" id="textToConvert" />
+    <input type="button" value="Click me" onclick="convert();">
+  </form>
+  </form>
+  <audio controls>
+    <source src="https://demo-trusstedagent-deployment-471112788437.s3.ap-southeast-1.amazonaws.com/file.wav?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECcaDmFwLXNvdXRoZWFzdC0xIkYwRAIgSwj5eH4DQWWCF3ozzrNL%2Bcw6lULBVaeNtSj6EGBRNeQCIFQ2U107qIcn%2F7SyoQwsFoM6o4lqDX781h7ZDXCnrXnbKssDCOD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNDcxMTEyNzg4NDM3IgyW7G%2B5CVHUBEwbUbIqnwOrDsyiC9C24qFpByr0RncIPc%2BPCo6NS06gyzE%2Br1SbcfYxuYRAMxvCalkGGdytJ9fnR1zP5D2LfIo57bdRUnBDCT40RViMsNLCy1jOIfQ1drfAFIy%2FzY1StG57BIAJkrJaIKD2phjXioW18YuPvTe3YKlVj5YJTepUCXNlqZZwz%2Fvhg06Cam3pMLNAUxsAjTAgSfimgeAHZN%2FFLrRxQKZjMkaCmG7ni4WFoURgLga1ZDuGmAtTY4pwniYpP0FO26X4gBFt48A4K8%2BxyaRSZgB7%2FIgNz5Dy5J2v0D6TghpMHBnbCRbAex35fklFD0bESSrVX31Nnqn52ErHmPmhzY%2B3l1j%2FoXw8nRBVrLMBLNUUScpia9JjwGUg7x4yNT78BN609DN9%2BnaChozV5TElLAP2Vsz5pZBX86wGgzjtaUr0OEUOTDkzr%2BZuZDtU0g5bQPquXIu8ye2IuUN1EAhzApQm6DfcMtm0PS%2B1U8sIMx9n5H2dfXCtdfA7HmPb%2BpJY8cLa2Xx2COsygrHBUM9XY467TvJXmrG%2FPoTQA59Gm9FMMK2Jp7QGOpUCSGaWu3ruPESjs1C%2BIPQpCGmthkxIE7XVqgSZXIJ9B7JcrS2yp0uhqIevWhimeS9qnULiV%2Bb3FoeevbTSynIVqxgOFQn4EaWT%2BK3O8RomTG6R6ggGuiB0VaM1f0add%2Fvp7vCcrmKDkYcKrR9pYC5D%2FxSBPRxY5MXmscOluGfj80QCtmLSEaPtn%2BKeXNbo8csEiYbzuRhLPVXNhhc5DAvWU%2FaEV2lcaVd9gl46hUdl3YrX9SBvgTPIkqwFwOlWhU7tP4RLYz8glSEjmGhtR9tigEzcxuQl%2FdQfxDxBRSXBjNWtsFvEyXTlyEjpXAhWCdhvj8yBJbtX2fqP6GYlUslUxD%2BYizQKvqAOsiAAevyf2bhoEOhfwg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240706T222743Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAW3MECVHK5F3CNWTY%2F20240706%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=904281d9b28aae732a376df22c9a4e203b6a598ae1678d7f0f130e64b26f5ea0"
+      type="audio/wav">
+    Your browser does not support the audio element
+  </audio>
+  </body>
+</html>

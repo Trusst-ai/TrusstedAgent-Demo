@@ -43,6 +43,7 @@ def prompt_to_file(prompt,filename):
 
     write_to_s3(output_filename)
 
+# This is James, your personal assistant from Alliance Bank. I will help you change your password. To ensure your privacy and help you effectively, we need to verify you. To proceed with verification, please briefly describe and provide a summary of your most recent interactions with us. Speak clearly and naturally for at least 15 seconds after the tone.
 prompt_to_file('Ini James, pembantu Maya dari Alliance Bank. Saya akan membantu anda menukar kata laluan anda. Untuk memastikan privasi anda dan membantu anda dengan berkesan, kami perlu mengesahkan anda. Untuk meneruskan dengan pengesahan, sila terangkan secara ringkas dan berikan ringkasan interaksi terbaharu anda dengan kami. Bercakap dengan jelas dan semula jadi selama sekurang-kurangnya 15 saat selepas nada.',
     'prompt_bahasa_1_voiceid.wav')
 
