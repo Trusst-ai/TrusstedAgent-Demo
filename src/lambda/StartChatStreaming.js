@@ -33,7 +33,7 @@ exports.handler = async (event) => {
           InstanceId: InstanceId, // required
           ContactId: ContactId, // required
           ChatStreamingConfiguration: { // ChatStreamingConfiguration
-            StreamingEndpointArn: 'arn:aws:sns:ap-southeast-2:855990150714:chat-sns-topic', // required
+            StreamingEndpointArn: 'arn:aws:sns:ap-southeast-2:905418409561:chat-sns-topic', // required
           },
           ClientToken: ClientToken, // required
         };

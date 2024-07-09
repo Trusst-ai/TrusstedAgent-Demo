@@ -71,9 +71,7 @@ functions:
     events:
       - sqs:
           arn:
-            Fn::GetAtt:
-              - ChatQueue
-              - Arn
+            Fn::GetAtt: ChatQueue.Arn
           batchSize: 1
   
   processstream:
@@ -180,9 +178,7 @@ resources:
           Ref: ChatSNSTopic
         Protocol: sqs
         Endpoint:
-          Fn::GetAtt:
-            - ChatQueue
-            - Arn
+          Fn::GetAtt: ChatQueue.Arn
 
 
     # Table for transcripts
