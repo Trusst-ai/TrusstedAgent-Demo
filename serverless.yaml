@@ -42,6 +42,40 @@ functions:
       STAGE: '${self:provider.stage}'
       SQS_QUEUE_URL: !Ref ProcessQueue
     
+  startChatstreaming:
+    handler: src/lambda/StartChatStreaming.handler
+    name: '${self:provider.stage}-${self:service}-start-chat-streaming'
+    description: 'Starts the streaming of chat messages to SNS Topic provided by Amazon Connect flow'
+    role: LambdaRole
+    memorySize: 256
+    timeout: 7
+    environment:
+      REGION: '${self:provider.region}'
+      STAGE: '${self:provider.stage}'
+      StreamingEndpointArn: !Ref ChatSNSTopic
+
+  processChatstreaming:
+    handler: src/lambda/ProcessChatStreaming.handler
+    name: '${self:provider.stage}-${self:service}-process-chat-streaming'
+    description: 'Handles writing of chat responses from SQS messages to dynamoDB'
+    role: LambdaRole
+    memorySize: 256
+    timeout: 7
+    environment:
+      REGION: '${self:provider.region}'
+      STAGE: '${self:provider.stage}'
+      TRANSCRIPTS_TABLE: !Ref TranscriptsTable
+      MESSAGES_TABLE: !Ref MessagesTable
+      NEXT_MESSAGE_TABLE: !Ref NextMessageTable
+      BEDROCK_REGION: ${env:bedrockRegion}
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - ChatQueue
+              - Arn
+          batchSize: 1
+  
   processstream:
     handler: src/lambda/ProcessStream.handler
     name: '${self:provider.stage}-${self:service}-process-stream'
@@ -87,6 +121,69 @@ functions:
 resources:
   Description: 'TrusstedAgent-Demo - ${self:provider.stage}'
   Resources:
+    #SNS Topic that receives customer chat messages from Amazon Connect once chat streaming starts
+    ChatSNSTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: chat-sns-topic
+
+    ChatSNSTopicPolicy:
+      Type: AWS::SNS::TopicPolicy
+      Properties:
+        Topics:
+          - Ref: ChatSNSTopic
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: connect.amazonaws.com
+              Action: sns:Publish
+              Resource: "arn:aws:sns:${self:provider.region}:${aws:accountId}:chat-sns-topic"
+              Condition:
+                StringEquals:
+                  aws:SourceAccount: "${aws:accountId}"
+                ArnEquals:
+                  aws:SourceArn: "arn:aws:connect:${self:provider.region}:${aws:accountId}:instance/255bc8a7-63d1-4e14-9958-73f65876c35a"
+
+    #Queue that receives chat messages from Amazon Connect via SNS
+    ChatQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ChatQueue
+
+    ChatQueuePolicy:
+      Type: AWS::SQS::QueuePolicy
+      Properties:
+        Queues:
+          - Ref: ChatQueue
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal: "*"
+              Action: "SQS:SendMessage"
+              Resource:
+                Fn::GetAtt:
+                  - ChatQueue
+                  - Arn
+              Condition:
+                ArnEquals:
+                  aws:SourceArn:
+                    Ref: ChatSNSTopic
+
+    #Subscribe SQS queue to SNS Topic to receive messages
+    SNSSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        TopicArn:
+          Ref: ChatSNSTopic
+        Protocol: sqs
+        Endpoint:
+          Fn::GetAtt:
+            - ChatQueue
+            - Arn
+
 
     # Table for transcripts
     TranscriptsTable:
@@ -222,6 +319,25 @@ resources:
         MaximumMessageSize: 1024
         MessageRetentionPeriod: 1209600
         QueueName: !Sub '${self:provider.stage}-${self:service}-process-redrive'
+        VisibilityTimeout: 120
+
+    ProcessChatQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        MaximumMessageSize: 1024
+        MessageRetentionPeriod: 1209600
+        QueueName: !Sub '${self:provider.stage}-${self:service}-process-chat'
+        VisibilityTimeout: 1000
+        RedrivePolicy:
+          deadLetterTargetArn: !GetAtt ProcessChatRedriveQueue.Arn
+          maxReceiveCount: 1
+
+    ProcessChatRedriveQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        MaximumMessageSize: 1024
+        MessageRetentionPeriod: 1209600
+        QueueName: !Sub '${self:provider.stage}-${self:service}-process-chat-redrive'
         VisibilityTimeout: 120
     
     # TextToSpeechInstance:
