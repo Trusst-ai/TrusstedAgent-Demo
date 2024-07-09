@@ -70,8 +70,7 @@ functions:
       BEDROCK_REGION: ${env:bedrockRegion}
     events:
       - sqs:
-          arn:
-            Fn::GetAtt: ChatQueue.Arn
+          arn: !GetAtt ChatQueue.Arn
           batchSize: 1
   
   processstream:
@@ -160,11 +159,8 @@ resources:
           Statement:
             - Effect: Allow
               Principal: "*"
-              Action: "SQS:SendMessage"
-              Resource:
-                Fn::GetAtt:
-                  - ChatQueue
-                  - Arn
+              Action: ["SQS:SendMessage", "SQS:ReceiveMessage"]
+              Resource: !GetAtt ChatQueue.Arn
               Condition:
                 ArnEquals:
                   aws:SourceArn:
@@ -177,8 +173,7 @@ resources:
         TopicArn:
           Ref: ChatSNSTopic
         Protocol: sqs
-        Endpoint:
-          Fn::GetAtt: ChatQueue.Arn
+        Endpoint: !GetAtt ChatQueue.Arn
 
 
     # Table for transcripts
@@ -279,7 +274,7 @@ resources:
                 - sqs:ReceiveMessage
                 - sqs:DeleteMessage
                 - sqs:GetQueueAttributes
-              Resource: 'arn:aws:sqs:${self:provider.region}:${env:accountNumber}:${self:provider.stage}-${self:service}-process'
+              Resource: '*'
             - Effect: Allow
               Action:
                 - sagemaker:InvokeEndpoint
