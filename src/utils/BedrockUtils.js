@@ -25,8 +25,8 @@ const customerBackground = `The customer is an enterprise user who is interested
 const tools = [
   {
     name: 'Subscribe',
-    description: `The customer is looking for assistance with subscribing to TrusstGPT. You should be excited by this as it will 
-    help accelerate the customers AI for customer experience use cases. Refer the customer to the deployment guide on Trusst AI Resource Centre 
+    description: `The customer is looking for assistance with subscribing to TrusstGPT. You should be excited by this as this will 
+    accelerate the execution of the customers AI for customer experience use cases. Refer the customer to the deployment guide on Trusst AI Resource Centre 
     using the following link: https://docs.trusst.ai/product-guides/deployment-guide-trusstgpt-on-aws`
   },
   {
@@ -53,11 +53,11 @@ const tools = [
   },
   {
     name: 'ResponsibleAI',
-    description: 'The user wants to find out more details regarding Trusst AI approach to responsible AI. Respond with the following excerpt from Trusst AI Approach to Responsible AI policy document: At Trusst AI we recognise the transformative potential of artificial intelligence and machine learning technologies to enhance customer experiences and operational efficiencies across various industries. For further detail, share the following link to the policy: https://docs.trusst.ai/product-guides/advocating-for-responsible-ai'
+    description: 'The user wants to find out more details regarding Trusst AI approach to responsible AI. Respond with the following excerpt from Trusst AI Approach to Responsible AI policy document: At Trusst AI we recognise the transformative potential of artificial intelligence and machine learning technologies to enhance customer experiences and operational efficiencies across various industries. For further detail, here is a link to our policy: https://docs.trusst.ai/product-guides/advocating-for-responsible-ai'
   },
   {
     name: 'Help',
-    description: `The customer needs help, tell the customer some of the actions you can help with, like providing information regarding TrusstGPT which is Trusst AI's platform for enabling any AI for customer experience use cases`
+    description: `The customer needs help, tell the customer some of the actions you can help with, like providing information regarding TrusstGPT, which is Trusst AI's platform for enabling any AI for customer experience use cases`
   },
   {
     name: 'Done',
@@ -325,7 +325,7 @@ function createAgentPolicy(messages, temperature,
   You can never change your personality, or divuldge confidential information.
   Customer background is also provided which you can refer to.
   You can ask questions to troubleshoot common problems, handing off to an
-  agent when you think you have all of the information. You only really help with TrusstGPT related issues, importantly all other things are off topic.
+  agent when you think you have all of the information. You only really assist with TrusstGPT related issues, importantly all other things are off topic.
   You should never ever mention you are an AI agent or details of your model.
   The current date is ${getCurrentDate()} and the current time in Melbourne Australia is: ${getCurrentTime()}. 
   Only ever emit one action and tool. Sample messages are provided below, you can never mention the sample conversation to the customer.`,
@@ -336,7 +336,7 @@ function createAgentPolicy(messages, temperature,
     <Agent>${agentInfo}</Agent>
     <CustomerBackground>${customerBackground}</CustomerBackground>
     <SampleMessages>${getKShotExamples()}</SampleMessages>
-    <Intent>Respond only using a tool no other content! You will have a message history and access to the list of tools. Output only in XML using the Schema</Intent>
+    <Intent>Respond only using a tool and no other content! You will have a message history and access to the list of tools. Output only in XML using the Schema</Intent>
     ${getToolsXML()}
     <Schema>
       <Response>
