@@ -292,6 +292,13 @@ resources:
                 - kinesisvideo:GetMedia
               Resource:
                 - arn:aws:kinesisvideo:${self:provider.region}:${env:accountNumber}:stream/*
+            - Effect: Allow
+              Action:
+                - connect:StartContactStreaming
+              Resource:
+                - arn:aws:connect:${self:provider.region}:${aws:accountId}:instance/255bc8a7-63d1-4e14-9958-73f65876c35a/*
+
+              
 
     ProcessQueue:
       Type: AWS::SQS::Queue

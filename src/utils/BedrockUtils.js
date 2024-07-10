@@ -104,7 +104,7 @@ const kshotExamples = [
   },
   {
     role: 'user', 
-    content: 'OK, why can I not subscribe to TrusstGPT??'
+    content: 'OK, why can I not subscribe to TrusstGPT?'
   },
   {
     role: 'assistant', 
@@ -164,7 +164,7 @@ const kshotExamples = [
     <Thought>I have helped the customer with their issue and a human will assist from now on</Thought>
     <Action>
       <Tool>Done</Tool>
-      <Argument>Thank you for your helpful responses I am transferring you to an agent now to help with your fixed line internet performance issues.</Argument>
+      <Argument>Thank you for your helpful responses I am transferring you to an agent now to help further.</Argument>
     </Action>
   </Response>`
   }
