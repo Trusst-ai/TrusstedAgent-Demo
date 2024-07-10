@@ -297,9 +297,7 @@ resources:
                 - connect:StartContactStreaming
               Resource:
                 - arn:aws:connect:${self:provider.region}:${aws:accountId}:instance/255bc8a7-63d1-4e14-9958-73f65876c35a/*
-
-              
-
+                
     ProcessQueue:
       Type: AWS::SQS::Queue
       Properties:
