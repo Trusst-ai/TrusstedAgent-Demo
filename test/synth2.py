@@ -56,8 +56,7 @@ prompt_to_file('Kata laluan anda telah berjaya ditetapkan semula. Adakah terdapa
     'prompt_bahasa_3_anything_else.wav')
 
 # Unfortunately, there was an error. Please try again later.
-prompt_to_file('Malangnya, terdapat ralat. Sila cuba sebentar lagi.',
-    'prompt_bahasa_4_unfortunately_error.wav')
+prompt_to_file('Malangnya, terdapat ralat. Sila cuba lagi kemudian.','prompt_bahasa_4_unfortunately_error.wav')
 
 # I encountered an error! Goodbye!
 prompt_to_file('Saya mengalami ralat! selamat tinggal!.',
@@ -83,8 +82,8 @@ prompt_to_file('Terima kasih! Saya tidak akan menjadi kedua.',
 prompt_to_file('Saya hanya mencari penyelesaian terbaik untuk itu.',
     'prompt_bahasa_9_best_solution.wav')
 
-# Cool. Won't be long.
-prompt_to_file('Sejuk. Tidak lama lagi.',
+# One moment please.
+prompt_to_file('Sebentar, sila.',
     'prompt_bahasa_10_cool_wont.wav')
 
 # I am enabling thinking mode.
