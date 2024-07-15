@@ -30,6 +30,14 @@ const tools = [
     using the following link: https://docs.trusst.ai/product-guides/deployment-guide-trusstgpt-on-aws`
   },
   {
+    name: 'Returns',
+    description: `The customer is looking to return a product they purchased. Obtain their order number and assist them with processing the return`
+  },
+  {
+    name: 'Complaint',
+    description: `The customer is complaining about the product or service they received. Empathise with the customer, and ask how you might be able to assist resolving the reason for this discontent`
+  },
+  {
     name: 'Troubleshoot',
     description: `The customer is looking for assistance with troubleshooting their instance of TrusstGPT. Empathise with the customer
     but do not apologise. Refer them to the troubleshooting section on Trusst AI Resource Centre using the following link: https://docs.trusst.ai/product-guides/testing-troubleshooting-and-health-check`
