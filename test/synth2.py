@@ -43,47 +43,48 @@ def prompt_to_file(prompt,filename):
 
     write_to_s3(output_filename)
 
-# This is James, your personal assistance from Alliance Bank. I will help you change your password. To ensure your privacy and help you effectively, we need to verify you. To proceed with verification, please briefly describe and provide a summary of your most recent interaction with us. Speak clearly and naturally for at least 15 seconds after the tone.
-prompt_to_file('Ini James, pembantu peribadi anda dari Alliance Bank. Saya akan membantu anda menukar kata laluan anda. Untuk memastikan privasi anda dan membantu anda dengan berkesan, kami perlu mengesahkan identiti anda. Untuk meneruskan pengesahan, sila huraikan secara ringkas dan berikan ringkasan interaksi terkini anda dengan kami. Bercakaplah dengan jelas dan secara semula jadi selama sekurang-kurangnya 15 saat selepas bunyi isyarat.',
+#1 Thank you for contacting Alliance Bank. My name is Maya, and I will assist you today. For security purposes, I need you to speak clearly and repeat a short phrase to verify your identity. The phrase to be repeated is: 'My bank information is sensitive. I will not download any APK files. I will not click any links in SMS.' Please repeat this phrase to the best of your ability after the beep.
+prompt_to_file('Terima kasih kerana menghubungi Alliance Bank. Nama saya Maya, dan saya akan membantu anda pada hari ini. Untuk tujuan keselamatan, saya memerlukan anda untuk bercakap dengan jelas dan mengulangi frasa pendek bagi mengesahkan identiti anda. Frasa yang perlu diulangi ialah: "Maklumat bank saya adalah sensitif. Saya tidak akan memuat turun sebarang fail APK. Saya tidak akan mengklik sebarang pautan dalam SMS." Sila ulang frasa ini sebaik mungkin selepas bunyi beep',
     'prompt_bahasa_1_voiceid.wav')
 
-# Thank you. You successfully authenticated. Please hold for a moment while we proceed to reset your password.
-prompt_to_file('Terima kasih. Anda berjaya mengesahkan. Sila tahan seketika sementara kami meneruskan untuk menetapkan semula kata laluan anda.',
+#2 Thank you. You successfully authenticated. Please hold for a moment while we proceed to reset your password"
+prompt_to_file('Terima kasih. Anda telah berjaya mengesahkan identiti anda. Sila tunggu sebentar sementara kami mengemaskini kata laluan anda.',
     'prompt_bahasa_2_resetting_password.wav')
 
-# Your password has been successfully reset. Is there anything else I can assist you with today?
-prompt_to_file('Kata laluan anda telah berjaya ditetapkan semula. Adakah terdapat apa-apa lagi yang boleh saya bantu anda hari ini?',
+#3 "Your password has been successfully reset. Is there anything else I can assist you with today?"
+prompt_to_file('Kata laluan anda telah dikemaskini. Ada apa-apa yang saya bantu anda hari ini?',
     'prompt_bahasa_3_anything_else.wav')
 
-# Unfortunately, there was an error. Please try again later.
-prompt_to_file('Malangnya, terdapat ralat. Sila cuba lagi kemudian.','prompt_bahasa_4_unfortunately_error.wav')
+#4 Unfortunately, there was an error. Please try again later.
+prompt_to_file('Harap maaf, sila cuba sekali lagi',
+    'prompt_bahasa_4_unfortunately_error.wav')
 
-# I encountered an error! Goodbye!
-prompt_to_file('Saya mengalami ralat! selamat tinggal!.',
+#5 Unfortunately, we are unable to authenticate you. We will transfer you to our agent for verification.
+prompt_to_file('Harap maaf, kami tidak dapat mengesahkan identiti anda. Kami akan memindahkan anda kepada ejen kami untuk pengesahan.',
     'prompt_bahasa_5_error_goodbye.wav')
 
 # That concludes the test. Thank you, goodbye!
 prompt_to_file('Itu menyimpulkan ujian. Terima kasih selamat tinggal!',
     'prompt_bahasa_5_concludes_goodbye.wav')
 
-# Roger that, I'm just thinking, hang on.
-prompt_to_file('Roger itu, saya hanya berfikir, tahan.',
+# Thank you, one moment please.
+prompt_to_file('Baiklah. Tidak akan mengambil masa yang lama.',
     'prompt_bahasa_6_roger_that.wav')
 
-# Cool, I'm just looking that up.
-prompt_to_file('Hebat, saya hanya melihatnya.',
+# I am looking that up
+prompt_to_file('Saya sedang mencari itu',
     'prompt_bahasa_7_cool_looking_up.wav')
 
-# Thanks! I won't be a second.
-prompt_to_file('Terima kasih! Saya tidak akan menjadi kedua.',
+# Thank you, please hold on
+prompt_to_file('Terima kasih, sila tunggu sebentar',
     'prompt_bahasa_8_thanks_second.wav')
 
-# I'm just finding the best solution for that.
-prompt_to_file('Saya hanya mencari penyelesaian terbaik untuk itu.',
+# Thank you, please hold on
+prompt_to_file('Terima kasih, sila tunggu sebentar',
     'prompt_bahasa_9_best_solution.wav')
 
-# One moment please.
-prompt_to_file('Sebentar, sila.',
+# Thank you, please hold on
+prompt_to_file('Terima kasih, sila tunggu sebentar',
     'prompt_bahasa_10_cool_wont.wav')
 
 # I am enabling thinking mode.
@@ -94,19 +95,22 @@ prompt_to_file('Saya mendayakan mod berfikir.',
 prompt_to_file('Selamat datang',
     'prompt_bahasa_12_welcome.wav')
 
-# Unfortunately there was an error. You will now be transferred to our next available agent to authenticate you or enroll your Voice ID.
-prompt_to_file('Malangnya terdapat ralat. Anda kini akan dipindahkan ke ejen kami yang tersedia seterusnya untuk mengesahkan anda atau mendaftarkan ID Suara anda.',
+# Unfortunately, we are unable to authenticate you. We will transfer you to our agent for verification.
+prompt_to_file('Harap maaf, kami tidak dapat mengesahkan identiti anda. Kami akan memindahkan anda kepada ejen kami untuk pengesahan.',
     'prompt_bahasa_13_enroll.wav')
 
 # Thank you. A one-time password has been sent via SMS. Please enter the PIN using your keypad after the beep.
+# N/A: We've disabled MFA
 prompt_to_file('Terima kasih. Kata laluan sekali guna telah dihantar melalui SMS. Sila masukkan PIN menggunakan pad kekunci anda selepas bunyi bip.',
     'prompt_bahasa_14_one_time_password_sent.wav')
 
 # Thank you. You have been successfully authenticated using voice biometrics and a one-time PIN. Please wait while we reset your password.
+# N/A: We've disabled MFA
 prompt_to_file('Terima kasih. Anda telah berjaya disahkan menggunakan biometrik suara dan PIN sekali guna. Sila tunggu sementara kami menetapkan semula kata laluan anda.',
     'prompt_bahasa_15_successfully_authenticated.wav')
 
 # Sorry, we didn't recognise your input, please try entering the one time pin again. 
+# N/A: We've disabled MFA
 prompt_to_file('Maaf, kami tidak dapat mengenali input anda. Sila cuba masukkan PIN sekali guna sekali lagi.',
     'prompt_bahasa_16_input_not_recognised.wav')
 
@@ -115,5 +119,9 @@ prompt_to_file('Anda telah melebihi bilangan percubaan yang dibenarkan.',
     'prompt_bahasa_17_retries_exceeded.wav')
 
 # Your password has been reset successfully.
-prompt_to_file('Kata laluan anda telah berjaya ditetapkan semula.',
+prompt_to_file('Kata laluan anda telah dikemaskini',
     'prompt_bahasa_18_password_reset_successful.wav')
+
+# Thank you for contacting Alliance Bank. We hope you are satisfied with our service.
+prompt_to_file('Terima kasih kerana menghubungi Alliance Bank. Kami berharap anda berpuas hati dengan perkhidmatan kami.',
+    'prompt_bahasa_19_satisfied_service.wav')
