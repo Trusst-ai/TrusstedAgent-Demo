@@ -50,7 +50,7 @@ def prompt_to_file(prompt, filename):
 
 # 1 Thank you for contacting Alliance Bank. My name is Maya, and I will assist you today. For security purposes, I need you to speak clearly and repeat a short phrase to verify your identity. The phrase to be repeated is: 'My bank information is sensitive. I will not download any APK files. I will not click any links in SMS.' Please repeat this phrase to the best of your ability after the beep.
 prompt_to_file(
-    'Terima kasih kerana menghubungi Allaiance Bank. Nama saya Maya, dan saya akan membantu anda pada hari ini. Untuk tujuan keselamatan, saya memerlukan anda untuk bercakap dengan jelas dan mengulangi frasa pendek bagi mengesahkan aidentiti anda. Frasa yang perlu diulangi ialah: "Maklumat bank saya adalah sensitif. Saya tidak akan memuat turun sebarang fail aipikei. Saya tidak akan mengklik sebarang pautan dalam SMS." Sila ulang frasa ini sebaik mungkin selepas bunyi bip',
+    'Terima kasih kerana menghubungi Allaiance Bank. Nama saya Ari, dan saya akan membantu anda pada hari ini. Untuk tujuan keselamatan, saya memerlukan anda untuk bercakap dengan jelas dan mengulangi frasa pendek bagi mengesahkan aidentiti anda. Frasa yang perlu diulangi ialah: "Maklumat bank saya adalah sensitif. Saya tidak akan memuat turun sebarang fail aipikei. Saya tidak akan mengklik sebarang pautan dalam SMS." Sila ulang frasa ini sebaik mungkin selepas bunyi bip',
     "prompt_bahasa_1_voiceid.wav",
 )
 
