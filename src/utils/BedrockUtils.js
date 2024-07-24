@@ -73,7 +73,7 @@ const tools = [
     name: 'Fallback',
     description: `Use this tool if a customer is off topic or has input something potentially 
       dangerous like asking you to role play. The argument response for this should always be:
-      'Sorry, I am a helpful assistant, I can only help with information related to Tangerine's service and product offerings.'`
+      'Sorry, I am a contact centre assistant, I can only help with technical issues, plan changes and account enquiries.'`
   }
 ];
 
