@@ -89,7 +89,7 @@ const kshotExamples = [
     <Thought>This looks off topic I will use the Fallback tool.</Thought>
     <Action>
       <Tool>Fallback</Tool>
-      <Argument>Sorry, I am an assistant for Tangerine, I can only help with issues related to Tangerine related product and service offerings.</Argument>
+      <Argument>Sorry, I am a contact centre assistant, I can only help with technical issues, plan changes and account enquiries.</Argument>
     </Action>
   </Response>`
   },
@@ -104,40 +104,40 @@ const kshotExamples = [
     <Thought>This looks off topic I will use the Fallback tool.</Thought>
     <Action>
       <Tool>Fallback</Tool>
-      <Argument>Sorry, I am an assistant for Tangerine, I can only help with issues related to Tangerine related product and service offerings.</Argument>
+      <Argument>Sorry, I am a contact centre assistant, I can only help with technical issues, plan changes and account enquiries.</Argument>
     </Action>
   </Response>`
   },
   {
     role: 'user', 
-    content: 'I am struggling to activate my SIM card?'
+    content: 'OK, why is my internet slow??'
   },
   {
     role: 'assistant', 
     content: 
   `<Response>
-    <Thought>I should find out at which stage of the process the use is struggling with.</Thought>
+    <Thought>I should find out what device the user is experiencing slow internet from, phone or fixed internet, cellular or wifi</Thought>
     <Action>
-      <Tool>Subscribe</Tool>
-      <Argument>Can you please tell me a bit more about which stage of the subscription process you are having issues with?</Argument>
+      <Tool>TechnicalSupport</Tool>
+      <Argument>Can you please tell me a bit more about what device and network you are having issues with?</Argument>
     </Action>
   </Response>`
   },
   {
     role: 'user', 
-    content: 'I think I subscribed to Tangerine with the incorrect AWS Account'
+    content: 'Its slow on my phone connected to my home wifi'
   },
   {
     role: 'assistant', 
     content: 
   `<Response>
-    <Thought>The account which the biller uses to subscribe in the AWS Marketplace is the account which will be billed for the TrusstGPT fees by AWS. 
-    The user can specify a separate account for billing to the account which they deploy TrusstGPT into. 
-    The user can reference further details regarding this here: https://docs.trusst.ai/product-guides/deployment-guide-trusstgpt-on-aws#step-2-subscribe-to-trusstgpt-in-aws-marketplace
+    <Thought>This is an internet speed issue, but the user is connected to wifi, I should suggest they test internet speed once disconnected from the wifi
+      to confirm its not a wifi issue otherwise troubleshoot the wifi and the fixed line internet connection
+      perhaps with another attached device. This could also be other devices using all of the bandwidth.
     </Thought>
     <Action>
-      <Tool>Subscribe</Tool>
-      <Argument>Can you please test your internet speed using your phone&apos;s cellular data, you might also try 
+      <Tool>TechnicalSupport</Tool>
+      <Argument>Can you please test your internet speed using your phones cellular data, you might also try 
       restarting your phone. Finally are there other devices that could be using the network heavily (including streaming services)
       or that you could use to test the network speed?</Argument>
     </Action>
@@ -145,13 +145,13 @@ const kshotExamples = [
   },
   {
     role: 'user', 
-    content: 'I subscribed to TrusstGPT using account 371113788437, but I mistakenly specified the wrong account in the setup process'
+    content: 'I restarted my phone and its the same, when not using wifi speed is pretty good, there are no other devices attached.'
   },
   {
     role: 'assistant', 
     content: 
     `<Response>
-    <Thought>I should get an agent to help resolve this issue with the users subscription.</Thought>
+    <Thought>I should get an agent to help troubleshoot this issue with the users fixed line internet.</Thought>
     <Action>
       <Tool>Agent</Tool>
       <Argument>The customer is having issues with the phone connected to wifi but not while connected to cellular data. 
@@ -170,7 +170,7 @@ const kshotExamples = [
     <Thought>I have helped the customer with their issue and a human will assist from now on</Thought>
     <Action>
       <Tool>Done</Tool>
-      <Argument>Thank you for your helpful responses I am transferring you to an agent now to help further.</Argument>
+      <Argument>Thank you for your helpful responses I am transferring you to an agent now to help with your fixed line internet performance issues.</Argument>
     </Action>
   </Response>`
   }
