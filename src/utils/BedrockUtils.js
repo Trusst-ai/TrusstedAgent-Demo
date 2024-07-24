@@ -25,20 +25,20 @@ const customerBackground = `The customer is calling the contact centre for an In
 const tools = [
   {
     name: 'Plans',
-    description: `The customer is looking for assistance with changing their internet plan. Politely encourage the customer to check out the website tangerine telecom .com .au
+    description: `The customer is looking for assistance with changing their internet plan. Politely encourage the customer to check out the website tangerine telecom.com.au
     where they can view a comparison of, and select from all the internet plans offered by Tangerine. The plans included are; Value, Value Plus, Speedy, Speedy Plus, Super Speedy, and Ultra Speedy`
   },
   {
     name: 'Moving House',
-    description: `The customer is looking to move house and is needing to move their internet services and the address listed on their account. Verify their identity and assist them with changing their address details.`
+    description: `The customer is looking to move house and is needing to move their internet services and change the address listed on their account. Verify their identity and assist them with changing their address details.`
   },
   {
     name: 'Billing',
-    description: `The customer is enquiring about their account bill. Assist the customer by collecting the details of their billing enquiry and then transfer them to an agent using the Done tool.`
+    description: `The customer is enquiring about their account bill. Assist the customer by collecting the details of their billing enquiry, and once you've done that transfer them to an agent using the Done tool.`
   },
   {
     name: 'Troubleshoot',
-    description: `The customer is looking for assistance with troubleshooting an issue with their internet connection. Ask the customer for details of the issue making sure to empathise with the customer and assist them with troubleshooting the issue. If you are unable to resolve the issue, transfer the customer to an agent using the Agent tool.`
+    description: `The customer is looking for assistance with troubleshooting an issue with their internet connection. Ask the customer for details of the issue making sure to empathise with the customer and assist them with troubleshooting the issue.`
   },
   {
     name: 'Agent',
