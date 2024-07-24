@@ -27,7 +27,7 @@ echo "Using AWS_PROFILE=${AWS_PROFILE}"
 export accountNumber=$(aws sts get-caller-identity --query Account --output text)
 
 # Whisper V3
-export whisperEndPoint=lissten-endpoint
+export whisperEndPoint=lissten-malay
 
 # S3 bucket to upload deployment assets to
 export deploymentBucket="${stage}-${service}-deployment-${accountNumber}"

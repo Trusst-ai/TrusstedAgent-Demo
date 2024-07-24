@@ -3,7 +3,7 @@
 const sageMakerUtils = require('../utils/SageMakerUtils');
 const kinesisVideoUtils = require('../utils/KinesisVideoUtils');
 const dynamoUtils = require('../utils/DynamoUtils');
-const bedrockUtils = require('../utils/BedrockUtils');
+const bedrockUtils = require('../utils/BedrockUtilsBahasa');
 
 const { EbmlStreamDecoder, EbmlTagId } = require('ebml-stream');
 const fs = require('fs');

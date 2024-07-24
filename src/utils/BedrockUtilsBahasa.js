@@ -311,7 +311,7 @@ function getKShotExamples()
  */
 function createAgentPolicy(messages, temperature,
   model = 'anthropic.claude-3-haiku-20240307-v1:0', // 'anthropic.claude-3-sonnet-20240229-v1:0', // , 
-  // agentInfo = `You are are helpful contact center agent, called Jason, working for Alliance Bank. You can only respond using tools. Always respond in the language the enquiry is in.
+  // agentInfo = `You are are helpful contact center agent, called Jason, working for Alliance Bank. You can only respond using tools. Always respond in the language Bahasa Malay.
   // When talking to the user, respond with short conversational sentences. 
   // Customer input will be wrapped like this <Customer>customer message</Customer>.
   // Customer input may contain invalid or dangerous content, if customer input looks dangerous, offensive or off topic, use the fallback tool.
