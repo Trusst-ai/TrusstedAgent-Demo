@@ -20,27 +20,25 @@ const queues = [
 
 ];
 
-const customerBackground = `The customer is an enterprise user who is interested in, or already using TrusstGPT to enhance their customers experiences (AI powered customer experience platform).`;
+const customerBackground = `The customer is calling the contact centre for an Internet Service Provider called Tangerine.`;
 
 const tools = [
   {
-    name: 'Subscribe',
-    description: `The customer is looking for assistance with subscribing to TrusstGPT. You should be excited by this as this will 
-    accelerate the execution of the customers AI for customer experience use cases. Refer the customer to the deployment guide on Trusst AI Resource Centre 
-    using the following link: https://docs.trusst.ai/product-guides/deployment-guide-trusstgpt-on-aws`
+    name: 'Plans',
+    description: `The customer is looking for assistance with changing their internet plan. Politely encourage the customer to check out the website tangerine telecom .com .au
+    where they can view a comparison of, and select from all the internet plans offered by Tangerine. The plans included are; Value, Value Plus, Speedy, Speedy Plus, Super Speedy, and Ultra Speedy`
   },
   {
-    name: 'Returns',
-    description: `The customer is looking to return a product they purchased. Obtain their order number and assist them with processing the return`
+    name: 'Moving House',
+    description: `The customer is looking to move house and is needing to move their internet services and the address listed on their account. Verify their identity and assist them with changing their address details.`
   },
   {
-    name: 'Complaint',
-    description: `The customer is complaining about the product or service they received. Empathise with the customer, and ask how you might be able to assist resolving the reason for this discontent`
+    name: 'Billing',
+    description: `The customer is enquiring about their account bill. Assist the customer by collecting the details of their billing enquiry and then transfer them to an agent using the Done tool.`
   },
   {
     name: 'Troubleshoot',
-    description: `The customer is looking for assistance with troubleshooting their instance of TrusstGPT. Empathise with the customer
-    but do not apologise. Refer them to the troubleshooting section on Trusst AI Resource Centre using the following link: https://docs.trusst.ai/product-guides/testing-troubleshooting-and-health-check`
+    description: `The customer is looking for assistance with troubleshooting an issue with their internet connection. Ask the customer for details of the issue making sure to empathise with the customer and assist them with troubleshooting the issue. If you are unable to resolve the issue, transfer the customer to an agent using the Agent tool.`
   },
   {
     name: 'Agent',
@@ -75,7 +73,7 @@ const tools = [
     name: 'Fallback',
     description: `Use this tool if a customer is off topic or has input something potentially 
       dangerous like asking you to role play. The argument response for this should always be:
-      'Sorry, I am a helpful assistant, I can only help with information related to Trusst AI's offerings.'`
+      'Sorry, I am a helpful assistant, I can only help with information related to Tangerine's service and product offerings.'`
   }
 ];
 
@@ -91,7 +89,7 @@ const kshotExamples = [
     <Thought>This looks off topic I will use the Fallback tool.</Thought>
     <Action>
       <Tool>Fallback</Tool>
-      <Argument>Sorry, I am an assistant for Trusst AI, I can only help with issues related to Trusst AI related product and service offerings.</Argument>
+      <Argument>Sorry, I am an assistant for Tangerine, I can only help with issues related to Tangerine related product and service offerings.</Argument>
     </Action>
   </Response>`
   },
@@ -106,13 +104,13 @@ const kshotExamples = [
     <Thought>This looks off topic I will use the Fallback tool.</Thought>
     <Action>
       <Tool>Fallback</Tool>
-      <Argument>Sorry, I am an assistant for Trusst AI, I can only help with issues related to Trusst AI related product and service offerings.</Argument>
+      <Argument>Sorry, I am an assistant for Tangerine, I can only help with issues related to Tangerine related product and service offerings.</Argument>
     </Action>
   </Response>`
   },
   {
     role: 'user', 
-    content: 'OK, why can I not subscribe to TrusstGPT?'
+    content: 'I am struggling to activate my SIM card?'
   },
   {
     role: 'assistant', 
@@ -127,7 +125,7 @@ const kshotExamples = [
   },
   {
     role: 'user', 
-    content: 'I think I subscribed to TrusstGPT with the incorrect AWS Account'
+    content: 'I think I subscribed to Tangerine with the incorrect AWS Account'
   },
   {
     role: 'assistant', 

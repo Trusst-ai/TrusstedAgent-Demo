@@ -1,20 +1,20 @@
 #!/bin/bash
 
 # Change to test, uat, prod etc
-export stage=demo
+export stage=agent
 
 # Should not need to change
 export service=trusstedagent
 
 # Target AWS deployment region
-export region=ap-southeast-1
+export region=ap-southeast-2
 
 # Bedrock region
 export bedrockRegion=ap-southeast-2
 
 export AWS_REGION=$region
 
-export AWS_PROFILE=alliance
+export AWS_PROFILE=demo
 
 if [ -z "$AWS_PROFILE" ]; then
   echo "Please set AWS_PROFILE=<<your-aws-profile>> before continuing..."
